@@ -86,7 +86,7 @@ if (isset($_REQUEST['insert'])) {
     $tipo = $_REQUEST['tipo'];
     $qta = $_REQUEST['qta'];
     $query = "INSERT INTO RACCOLTA (TIPO,QUANTITA,UTENTE,ANNO) VALUES ('$tipo',$qta,'$webUsername',$anno)";
-    $result = mysqli_query($query) or die('<h1>Insert failed!</h1>' . mysqli_error());
+    $result = mysqli_query($link,$query) or die('<h1>Insert failed!</h1>' . mysqli_error());
 }
 $query = "
             SELECT ANNO,TIPO,SUM(QUANTITA) TOT_QTA
