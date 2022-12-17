@@ -194,13 +194,14 @@ mysqli_close($link);
             <?php
             $valore_tot = 0;
             foreach ($voci as $voce) {
-                $valore = $tabella_dati[$anno][$voce] * $prezzoUnitario[$voce];
+                $quantita = (isset($tabella_dati[$anno][$voce])) ? $tabella_dati[$anno][$voce] : 0;
+                $valore = $quantita * $prezzoUnitario[$voce];
                 $valore_tot += $valore;
                 $perc = [
-                    $anno - 1 => sprintf("%d %%", round((($tabella_dati[$anno][$voce] / $tabella_dati[$anno - 1][$voce]) - 1) * 100)),
-                    $anno - 2 => sprintf("%d %%", round((($tabella_dati[$anno][$voce] / $tabella_dati[$anno - 2][$voce]) - 1) * 100))
+                    $anno - 1 => sprintf("%d %%", round((($quantita / $tabella_dati[$anno - 1][$voce]) - 1) * 100)),
+                    $anno - 2 => sprintf("%d %%", round((($quantita / $tabella_dati[$anno - 2][$voce]) - 1) * 100))
                 ];
-                echo "<tr><td>$voce</td><td>{$tabella_dati[$anno][$voce]}</td><td>$valore</td><td>{$perc[$anno-1]}</td><td>{$perc[$anno-2]}</td></tr>";
+                echo "<tr><td>$voce</td><td>{$quantita}</td><td>$valore</td><td>{$perc[$anno-1]}</td><td>{$perc[$anno-2]}</td></tr>";
             }
             echo "<tr><td>&nbsp;</td><td>&nbsp;</td><td><b>$valore_tot</b></td><td>&nbsp;</td><td>&nbsp;</td></tr>";
             ?>
