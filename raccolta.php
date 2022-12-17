@@ -111,7 +111,7 @@ $result = mysqli_query($link, $query) or die('<H1>Query Ultimi inserimenti faile
 
 // Printing results in HTML
 $tabella_ultimi = [];
-while ($line = mysqli_fetch_array($result, mysqli_ASSOC)) {
+while ($line = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
     $tabella_ultimi[] = $line;
 }
 echo "<!-- " . print_r($tabella_ultimi, true) . "-->";
